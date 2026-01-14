@@ -35,11 +35,7 @@ function App() {
 	return (
 		<div className="app">
 			<header className="header">
-				<img
-					src="../../public/icon-192.png"
-					alt="Logo"
-					className="header-logo"
-				/>
+				<img src="/icon-192.png" alt="Logo" className="header-logo" />
 				<h1>AI Recipe Generator</h1>
 			</header>
 			<main className="container">
