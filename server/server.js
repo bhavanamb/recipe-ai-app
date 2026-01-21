@@ -15,7 +15,15 @@ const openai = new OpenAI({
 	apiKey: process.env.OPENAI_API_KEY,
 });
 
-app.use(cors()); //Allow request from react app
+app.use(
+	cors({
+		origin:
+			process.env.NODE_ENV === "production"
+				? "https://recipe-ai-app-bhavanamb9-2025-bhavanas-projects-3b7269ff.vercel.app"
+				: "http://localhost:5173",
+		credentials: true,
+	})
+); //Allow request from react app
 app.use(express.json()); //parse JSON bodies
 
 app.get("/api/health", (req, res) => {
@@ -82,9 +90,15 @@ app.post("/api/generate-recipe", async (req, res) => {
 	}
 });
 
-app.listen(PORT, () => {
-	console.log(`🚀 Server running on http://localhost:${PORT}`);
-	console.log(
-		`✅ OpenAI API key configured: ${process.env.OPENAI_API_KEY ? "Yes" : "No"}`
-	);
-});
+if (process.env.NODE_ENV !== "production") {
+	app.listen(PORT, () => {
+		console.log(`🚀 Server running on http://localhost:${PORT}`);
+		console.log(
+			`✅ OpenAI API key configured: ${
+				process.env.OPENAI_API_KEY ? "Yes" : "No"
+			}`
+		);
+	});
+}
+
+export default app;

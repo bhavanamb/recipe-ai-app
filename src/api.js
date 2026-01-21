@@ -1,3 +1,6 @@
+//Get the correct API URL based on environment
+const API_URL = import.meta.env.PROD ? "/api" : "http://localhost:3001/api";
+
 export const generateRecipe = async (ingredients, onChunk) => {
 	try {
 		const response = await fetch("http://localhost:3001/api/generate-recipe", {
