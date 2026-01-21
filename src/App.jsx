@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { generateRecipe } from "./openaiService";
+import { generateRecipe } from "./api";
 
 function App() {
 	const [ingredients, setIngredients] = useState("");
@@ -11,6 +11,7 @@ function App() {
 		// if no ingredients are entered
 		if (!ingredients.trim()) {
 			setError("Please enter some ingredients");
+			return;
 		}
 		// loading needs to be true once user clicks on submit
 		setLoading(true);
